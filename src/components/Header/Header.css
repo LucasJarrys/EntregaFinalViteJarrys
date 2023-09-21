@@ -1,0 +1,10 @@
+.Header{
+    display: flex;
+    justify-content: center;
+    background-color: darkcyan;
+    width: 100%;
+}
+
+.Header h1{
+    color: black;
+}
