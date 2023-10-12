@@ -1,0 +1,35 @@
+[
+        {"id":1, 
+        "nombre":"paleta steel BOOM" , 
+        "precio": 75000, 
+        "imagen": "PaletaSteel.png"},
+        {"id":2, 
+        "nombre":"paleta Hans carbon" , 
+        "precio": 150000, 
+        "imagen": "PaletaCarbon.png"},
+        {"id":3, 
+        "nombre":"paleta royal fibra de vidrio" , 
+        "precio": 64000, 
+        "imagen": "PaletaRoyal.png"}
+    ]
+        <CardProduct
+        name="Paleta Steel"
+        description="Paleta con fibra de carbon 3K"
+        price="$100.000"
+        img={img1}
+        button="Agregar al carrito"
+        />
+        <CardProduct
+        name="Paleta Magnus"
+        description="Paleta con fibra de carbon 12K"
+        price="$150.000"
+        img={img2}
+        button="Agregar al carrito"
+        />
+        <CardProduct
+        name="Paleta Royal"
+        description="Paleta con fibra de carbon 18K"
+        price="$200.000"
+        img={img3}
+        button="Agregar al carrito"
+        /> 

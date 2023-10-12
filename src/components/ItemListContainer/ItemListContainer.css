@@ -8,3 +8,12 @@
     background-color: darkcyan;
     border-radius: 10px;
 }
+
+.Cards-List {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+  }
+  
