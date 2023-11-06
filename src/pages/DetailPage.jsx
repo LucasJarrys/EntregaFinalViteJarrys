@@ -1,26 +1,45 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import "./DetailPage.css";
 
-import { useParams } from 'react-router-dom';
-import CardProduct from "../components/CardProduct/CardProduct";
+// FIREBASE
+import { db } from "../firebase/firebaseConfig";
+import {
+  collection,
+  query,
+  getDocs,
+  where,
+  documentId,
+} from "firebase/firestore";
 
-const DetailPage = () => {
-    let { id } = useParams();
-    console.log("id", id)
-  const [prod, setProd] = useState ([]);
-    console.log(prod)
+// COMPONENTS
+import CardDetail from "../components/CardDetail/CardDetail"
+
+const PaddleDetailPage = () => {
+  const [paddleData, setPaddleData] = useState([]);
+  const { id } = useParams();
+
 
   useEffect(() => {
-    axios(`https://fakestoreapi.com/products/${id}`).then((res) => setProd(res.data))
-  },[id])
+    const getPaddles = async () => {
+      const q = query(collection(db, "paddles"), where(documentId(), "==", id));
+      const docs = [];
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        docs.push({ ...doc.data(), id: doc.id }); 
+      });
+      setPaddleData(docs);
+    };
+    getPaddles();
+  }, [id]);
+
   return (
-    <div>
-        <h1>DETALLE DEL PRODUCTO</h1>
-        <div style={{display: "flex", justifyContent: "center", margin: 20}}>
-          {prod.id ? <CardProduct prod={prod}/> : null}
-        </div>
-      </div>   
+    <div className="Detailpaddle">
+      {paddleData.map((paddle) => {
+        return <CardDetail paddle={paddle} key={paddle.id} />;
+      })}
+    </div>
   );
 };
 
-export default DetailPage;
+export default PaddleDetailPage;

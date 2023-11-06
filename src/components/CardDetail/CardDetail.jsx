@@ -1,12 +1,37 @@
 // import * as React from 'react';
+import React, { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
+
+//COMPONENT
+import ItemCount from "../ItemCount/ItemCount";
+
+
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import { CardActionArea, CardActions } from '@mui/material';
 
-const CardProduct = ({ button, paddle }) => {
+
+const CardProduct = ({ paddle }) => {
+  
+  const { addToCart, getQuantityById } = useContext( CartContext )
+
+  const onAdd = ( cantidad ) => {
+
+    const obj = {
+      ...paddle,
+      quantity: cantidad
+    }
+
+    addToCart( obj )
+  };
+
+  const quantity = getQuantityById(paddle.id)
+  console.log(quantity)
+  
   return (
+    
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
         <CardMedia
@@ -28,12 +53,10 @@ const CardProduct = ({ button, paddle }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          {button}
-        </Button>
+        <ItemCount onAdd={onAdd} stock={paddle.stock} initial={quantity} />
       </CardActions>
     </Card>
   );
-}
+};
 
 export default CardProduct
